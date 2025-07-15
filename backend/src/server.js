@@ -1,7 +1,7 @@
 import express from 'express';
 import {ENV} from "./config/env.js";
 import {db} from "./config/db.js";
-import { favTable } from './db/schema.js';
+import {  favourites } from './db/schema.js';
 
 
 const app = express();
@@ -21,11 +21,11 @@ app.post("/api/favourites", async (req, res) => {
     const {userId,  recipeId, title, image, cookTime, servings} = req.body;
 
     if(!userId || !recipeId || !title){
-        return res.status(400).json({error: "Missing required fields"});
+        return res.status(400).json({error: "Check again, all fields are required"});
     }
 
-    const newFavourite= await db.insert(favTable).values({
-        userId,
+    const newFavourite= await db.insert(favourites).values({
+         userId,
         recipeId,
         title,
         image,
