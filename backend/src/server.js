@@ -61,7 +61,22 @@ app.delete("/api/favourites/:userId/:recipeId", async(req, res) => {
     }
 )
 
+//adding the get endpoint
+app.get("/api/favourites/:userId", async (req, res) => {
+    try{
+        const { userId } = req.params;
 
+        const userFavourites = await db.select().from(favouritesTable).where(eq(favouritesTable.userId, userId));
+
+        res.status(200).json(userFavourites);
+
+    }catch (error){
+        console.error("Error fetching favourites:", error);
+        res.status(500).json({error: "Internal server error"});
+    }
+})
+
+//checking to see if the server is running
 app.listen(PORT, () => {
     console.log('Server is running on port:', PORT);
 })
