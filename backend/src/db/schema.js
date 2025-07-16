@@ -1,7 +1,7 @@
 import {pgTable, serial, text, timestamp, integer} from "drizzle-orm/pg-core"
 // import { use } from "react"
 
-export const favourites = pgTable("favourites", {
+export const favouritesTable = pgTable("favourites", {
     id: serial("id").primaryKey(),
     userId: text("user_id").notNull(), 
    recipeId: integer("recipe_id").notNull(),
